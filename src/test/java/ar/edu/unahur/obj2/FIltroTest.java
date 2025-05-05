@@ -16,9 +16,11 @@ public class FIltroTest {
 		IPaisService paisService = new PaisService();
         List<Pais> paises = paisService.getPaises();
         IFiltro filtro = new FiltroIdioma("Arabic");
+        IFiltro filtro2 = new FiltroIdioma("Arabic")
+        		.and (new FiltroIdioma("French"));
         
-        var paisesFiltrados = paises.stream()
-        				.filter(p -> filtro.apply(p))
+        List<Pais> paisesFiltrados = paises.stream()
+        				.filter(p -> filtro2.apply(p))
         				.toList();
         System.out.println(paisesFiltrados);
     }
