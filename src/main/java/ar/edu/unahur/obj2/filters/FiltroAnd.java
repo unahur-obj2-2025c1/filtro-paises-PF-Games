@@ -10,18 +10,19 @@ public class FiltroAnd extends FiltroCompuesto {
 	
 	
 	
-	public FiltroAnd(IFiltro filtro, IFiltro nuevo) {
+	public FiltroAnd(IFiltro filtro, IFiltro filtro2) {
 		this.filtros.add(filtro);
-		this.filtros.add(nuevo);
+		this.filtros.add(filtro2);
 	}
 	
-	
+	public IFiltro or(IFiltro filtro) {
+		return new FiltroOr(this, filtro);
+	}
 	
 	
 	@Override
 	public Boolean apply(Pais pais) {
-		
-		return null;
+		return this.filtros.stream().allMatch(f -> f.apply(pais));
 	}
 
 }
